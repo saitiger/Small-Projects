@@ -1,0 +1,102 @@
+# Seeded from IMDb public datasets by ranking tvSeries using rating * log10(votes). Generated on 2026-01-21T18:08:33.716698Z
+rank,title,imdb_url,imdb_tconst,year
+1,Breaking Bad,https://www.imdb.com/title/tt0903747/,tt0903747,2008
+2,Game of Thrones,https://www.imdb.com/title/tt0944947/,tt0944947,2011
+3,Sherlock,https://www.imdb.com/title/tt1475582/,tt1475582,2010
+4,Friends,https://www.imdb.com/title/tt0108778/,tt0108778,1994
+5,Stranger Things,https://www.imdb.com/title/tt4574334/,tt4574334,2016
+6,The Office,https://www.imdb.com/title/tt0386676/,tt0386676,2005
+7,Better Call Saul,https://www.imdb.com/title/tt3032476/,tt3032476,2015
+8,Attack on Titan,https://www.imdb.com/title/tt2560140/,tt2560140,2013
+9,The Sopranos,https://www.imdb.com/title/tt0141842/,tt0141842,1999
+10,Rick and Morty,https://www.imdb.com/title/tt2861424/,tt2861424,2013
+11,Avatar: The Last Airbender,https://www.imdb.com/title/tt0417299/,tt0417299,2005
+12,The Wire,https://www.imdb.com/title/tt0306414/,tt0306414,2002
+13,True Detective,https://www.imdb.com/title/tt2356777/,tt2356777,2014
+14,Dexter,https://www.imdb.com/title/tt0773262/,tt0773262,2006
+15,Peaky Blinders,https://www.imdb.com/title/tt2442560/,tt2442560,2013
+16,Black Mirror,https://www.imdb.com/title/tt2085059/,tt2085059,2011
+17,The Boys,https://www.imdb.com/title/tt1190634/,tt1190634,2019
+18,Arcane,https://www.imdb.com/title/tt11126994/,tt11126994,2021
+19,Death Note,https://www.imdb.com/title/tt0877057/,tt0877057,2006
+20,House,https://www.imdb.com/title/tt0412142/,tt0412142,2004
+21,Aspirants,https://www.imdb.com/title/tt14392248/,tt14392248,2021
+22,The Mandalorian,https://www.imdb.com/title/tt8111088/,tt8111088,2019
+23,Fargo,https://www.imdb.com/title/tt2802850/,tt2802850,2014
+24,The Last of Us,https://www.imdb.com/title/tt3581920/,tt3581920,2023
+25,One Piece,https://www.imdb.com/title/tt0388629/,tt0388629,1999
+26,Dark,https://www.imdb.com/title/tt5753856/,tt5753856,2017
+27,Narcos,https://www.imdb.com/title/tt2707408/,tt2707408,2015
+28,Seinfeld,https://www.imdb.com/title/tt0098904/,tt0098904,1989
+29,Ted Lasso,https://www.imdb.com/title/tt10986410/,tt10986410,2020
+30,House of Cards,https://www.imdb.com/title/tt1856010/,tt1856010,2013
+31,Vikings,https://www.imdb.com/title/tt2306299/,tt2306299,2013
+32,The Walking Dead,https://www.imdb.com/title/tt1520211/,tt1520211,2010
+33,Daredevil,https://www.imdb.com/title/tt3322312/,tt3322312,2015
+34,South Park,https://www.imdb.com/title/tt0121955/,tt0121955,1997
+35,Fullmetal Alchemist: Brotherhood,https://www.imdb.com/title/tt1355642/,tt1355642,2009
+36,How I Met Your Mother,https://www.imdb.com/title/tt0460649/,tt0460649,2005
+37,The Simpsons,https://www.imdb.com/title/tt0096697/,tt0096697,1989
+38,Firefly,https://www.imdb.com/title/tt0303461/,tt0303461,2002
+39,Succession,https://www.imdb.com/title/tt7660850/,tt7660850,2018
+40,Modern Family,https://www.imdb.com/title/tt1442437/,tt1442437,2009
+41,Severance,https://www.imdb.com/title/tt11280740/,tt11280740,2022
+42,The Big Bang Theory,https://www.imdb.com/title/tt0898266/,tt0898266,2007
+43,Lost,https://www.imdb.com/title/tt0411008/,tt0411008,2004
+44,Prison Break,https://www.imdb.com/title/tt0455275/,tt0455275,2005
+45,Westworld,https://www.imdb.com/title/tt0475784/,tt0475784,2016
+46,Mr. Robot,https://www.imdb.com/title/tt4158110/,tt4158110,2015
+47,Suits,https://www.imdb.com/title/tt1632701/,tt1632701,2011
+48,Supernatural,https://www.imdb.com/title/tt0460681/,tt0460681,2005
+49,Mindhunter,https://www.imdb.com/title/tt5290382/,tt5290382,2017
+50,It's Always Sunny in Philadelphia,https://www.imdb.com/title/tt0472954/,tt0472954,2005
+51,Invincible,https://www.imdb.com/title/tt6741278/,tt6741278,2021
+52,Arrested Development,https://www.imdb.com/title/tt0367279/,tt0367279,2003
+53,Mad Men,https://www.imdb.com/title/tt0804503/,tt0804503,2007
+54,Hunter x Hunter,https://www.imdb.com/title/tt2098220/,tt2098220,2011
+55,Money Heist,https://www.imdb.com/title/tt6468322/,tt6468322,2017
+56,House of the Dragon,https://www.imdb.com/title/tt11198330/,tt11198330,2022
+57,Parks and Recreation,https://www.imdb.com/title/tt1266020/,tt1266020,2009
+58,Brooklyn Nine-Nine,https://www.imdb.com/title/tt2467372/,tt2467372,2013
+59,Sons of Anarchy,https://www.imdb.com/title/tt1124373/,tt1124373,2008
+60,BoJack Horseman,https://www.imdb.com/title/tt3398228/,tt3398228,2014
+61,Yellowstone,https://www.imdb.com/title/tt4236770/,tt4236770,2018
+62,Ozark,https://www.imdb.com/title/tt5071412/,tt5071412,2017
+63,Shameless,https://www.imdb.com/title/tt1586680/,tt1586680,2011
+64,Downton Abbey,https://www.imdb.com/title/tt1606375/,tt1606375,2010
+65,Twin Peaks,https://www.imdb.com/title/tt0098936/,tt0098936,1990
+66,The Crown,https://www.imdb.com/title/tt4786824/,tt4786824,2016
+67,Fleabag,https://www.imdb.com/title/tt5687612/,tt5687612,2016
+68,The X-Files,https://www.imdb.com/title/tt0106179/,tt0106179,1993
+69,Community,https://www.imdb.com/title/tt1439629/,tt1439629,2009
+70,Andor,https://www.imdb.com/title/tt9253284/,tt9253284,2022
+71,Gravity Falls,https://www.imdb.com/title/tt1865718/,tt1865718,2012
+72,Hannibal,https://www.imdb.com/title/tt2243973/,tt2243973,2013
+73,The Bear,https://www.imdb.com/title/tt14452776/,tt14452776,2022
+74,Loki,https://www.imdb.com/title/tt9140554/,tt9140554,2021
+75,Cowboy Bebop,https://www.imdb.com/title/tt0213338/,tt0213338,1998
+76,Naruto: Shippuden,https://www.imdb.com/title/tt0988824/,tt0988824,2007
+77,Squid Game,https://www.imdb.com/title/tt10919420/,tt10919420,2021
+78,Homeland,https://www.imdb.com/title/tt1796960/,tt1796960,2011
+79,Futurama,https://www.imdb.com/title/tt0149460/,tt0149460,1999
+80,Shōgun,https://www.imdb.com/title/tt2788316/,tt2788316,2024
+81,Batman: The Animated Series,https://www.imdb.com/title/tt0103359/,tt0103359,1992
+82,Fallout,https://www.imdb.com/title/tt12637874/,tt12637874,2024
+83,Rome,https://www.imdb.com/title/tt0384766/,tt0384766,2005
+84,Dragon Ball Z,https://www.imdb.com/title/tt0214341/,tt0214341,1996
+85,Doctor Who,https://www.imdb.com/title/tt0436992/,tt0436992,2005
+86,The Punisher,https://www.imdb.com/title/tt5675620/,tt5675620,2017
+87,One Punch Man,https://www.imdb.com/title/tt4508902/,tt4508902,2015
+88,Spartacus,https://www.imdb.com/title/tt1442449/,tt1442449,2010
+89,Curb Your Enthusiasm,https://www.imdb.com/title/tt0264235/,tt0264235,2000
+90,Boardwalk Empire,https://www.imdb.com/title/tt0979432/,tt0979432,2010
+91,Freaks and Geeks,https://www.imdb.com/title/tt0193676/,tt0193676,1999
+92,Demon Slayer: Kimetsu no Yaiba,https://www.imdb.com/title/tt9335498/,tt9335498,2019
+93,Dexter: Resurrection,https://www.imdb.com/title/tt33043892/,tt33043892,2025
+94,Sex Education,https://www.imdb.com/title/tt7767422/,tt7767422,2019
+95,Battlestar Galactica,https://www.imdb.com/title/tt0407362/,tt0407362,2004
+96,Scrubs,https://www.imdb.com/title/tt0285403/,tt0285403,2001
+97,The Witcher,https://www.imdb.com/title/tt5180504/,tt5180504,2019
+98,Fringe,https://www.imdb.com/title/tt1119644/,tt1119644,2008
+99,This Is Us,https://www.imdb.com/title/tt5555260/,tt5555260,2016
+100,Panchayat,https://www.imdb.com/title/tt12004706/,tt12004706,2020

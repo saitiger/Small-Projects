@@ -1,0 +1,12 @@
+# Python artifacts
+__pycache__/
+.pytest_cache/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# TV finale pipeline datasets (keep local)
+Disappointing Finales/tv-finale-pipeline/data/raw/imdb/
+Disappointing Finales/tv-finale-pipeline/data/raw/cache/
+Disappointing Finales/tv-finale-pipeline/data/processed/
