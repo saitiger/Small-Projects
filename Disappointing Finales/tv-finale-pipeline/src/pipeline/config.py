@@ -21,6 +21,8 @@ class Config:
     tvmaze_episodes_parquet: Path
     tvmaze_unmatched_parquet: Path
     mapping_parquet: Path
+    curated_unresolved_csv: Path
+    curated_ingest_report_json: Path
     shows_parquet: Path
     episodes_parquet: Path
     features_parquet: Path
@@ -73,6 +75,8 @@ def get_config() -> Config:
         tvmaze_episodes_parquet=processed_dir / "tvmaze_episodes.parquet",
         tvmaze_unmatched_parquet=processed_dir / "tvmaze_unmatched_episodes.parquet",
         mapping_parquet=processed_dir / "mapping.parquet",
+        curated_unresolved_csv=processed_dir / "curated_unresolved.csv",
+        curated_ingest_report_json=processed_dir / "curated_ingest_report.json",
         shows_parquet=processed_dir / "shows.parquet",
         episodes_parquet=processed_dir / "episodes.parquet",
         features_parquet=processed_dir / "features.parquet",

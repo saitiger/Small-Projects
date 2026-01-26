@@ -5,9 +5,11 @@ import logging
 from pathlib import Path
 
 from pipeline.config import get_config
+from pipeline.curated_once import ingest_curated_once
 from pipeline.features import build_features
 from pipeline.imdb_download import download_imdb_datasets
 from pipeline.imdb_parse import build_imdb_tables
+from pipeline.io import read_parquet
 from pipeline.normalize import normalize
 from pipeline.report import build_report
 from pipeline.seed_top100 import seed_top100
@@ -49,6 +51,8 @@ def main() -> None:
     report_parser = subparsers.add_parser("report", help="Generate quality report")
     report_parser.add_argument("--overwrite", action="store_true")
 
+    subparsers.add_parser("ingest-curated-once", help="One-time curated finales ingestion")
+
     subparsers.add_parser("run-all", help="Run the full pipeline")
 
     args = parser.parse_args()
@@ -81,6 +85,10 @@ def main() -> None:
         build_report(config, overwrite=args.overwrite)
         return
 
+    if args.command == "ingest-curated-once":
+        ingest_curated_once(config)
+        return
+
     if args.command == "run-all":
         try:
             seed_top100(config)
@@ -97,6 +105,7 @@ def main() -> None:
             mapping_df=mapping_df,
             tvmaze_episodes_df=tvmaze_episodes_df,
         )
+        mapping_df = read_parquet(config.mapping_parquet)
         build_features(config, shows_df=shows_df, episodes_df=episodes_df)
         build_report(config, shows_df=shows_df, episodes_df=episodes_df, mapping_df=mapping_df)
         return

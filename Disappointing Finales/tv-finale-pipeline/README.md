@@ -62,3 +62,27 @@ PYTHONPATH=src python -m pipeline.cli report
 
 Seed CSV expected columns:
 `rank,title,imdb_url,imdb_tconst,year`
+
+## BigQuery migration
+Authenticate and set your project:
+
+```bash
+gcloud auth application-default login
+gcloud config set project <PROJECT_ID>
+```
+
+Required IAM role: BigQuery Data Editor (or higher).
+
+Run the migration:
+
+```bash
+PYTHONPATH=src python -m bq_migrate.cli all --project <PROJECT_ID> --dataset tv_finals
+```
+
+Individual steps:
+
+```bash
+PYTHONPATH=src python -m bq_migrate.cli load-all --project <PROJECT_ID> --dataset tv_finals
+PYTHONPATH=src python -m bq_migrate.cli create-views --project <PROJECT_ID> --dataset tv_finals
+PYTHONPATH=src python -m bq_migrate.cli run-checks --project <PROJECT_ID> --dataset tv_finals
+```

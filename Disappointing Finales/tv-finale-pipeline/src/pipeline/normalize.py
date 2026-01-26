@@ -35,6 +35,11 @@ def normalize(
     seed_df = pd.read_csv(config.seed_file, comment="#", dtype=str)
 
     shows = _build_shows(shows_df, mapping_df, seed_df, config)
+    filtered_tconsts = set(shows["imdb_tconst"])
+    mapping_df = mapping_df[mapping_df["imdb_tconst"].isin(filtered_tconsts)].copy()
+    if not mapping_df.empty:
+        write_parquet(mapping_df, config.mapping_parquet)
+
     episodes = _build_episodes(episodes_df, mapping_df, tvmaze_episodes_df, shows, config)
 
     write_parquet(shows, config.shows_parquet)
@@ -51,7 +56,9 @@ def _build_shows(shows_df: pd.DataFrame, mapping_df: pd.DataFrame, seed_df: pd.D
     df["title"] = df["primaryTitle"].fillna(df["originalTitle"]).fillna("")
 
     df["start_year"] = pd.to_numeric(df.get("startYear"), errors="coerce").astype("Int64")
-    df["end_year"] = pd.to_numeric(df.get("endYear"), errors="coerce").astype("Int64")
+    imdb_end_raw = df.get("endYear")
+    imdb_has_end = imdb_end_raw.notna() & (imdb_end_raw != "\\N") & (imdb_end_raw != "")
+    df["end_year"] = pd.to_numeric(imdb_end_raw.where(imdb_has_end), errors="coerce").astype("Int64")
 
     df["genres"] = df.get("genres").fillna("").apply(_parse_genres)
 
@@ -66,6 +73,11 @@ def _build_shows(shows_df: pd.DataFrame, mapping_df: pd.DataFrame, seed_df: pd.D
         lambda row: json.dumps({"imdb_url": row.get("imdb_url"), "tvmaze_url": row.get("tvmaze_url")}),
         axis=1,
     )
+
+    is_running = _is_running(imdb_has_end, df.get("tvmaze_status"))
+    if is_running.any():
+        logger.info("Filtering out running shows: %s", int(is_running.sum()))
+        df = df[~is_running].copy()
 
     _ensure_labels_template(config)
     if config.labels_csv.exists():
@@ -104,6 +116,7 @@ def _build_episodes(
         right_on="imdb_tconst",
         how="left",
     )
+    episodes = episodes[episodes["show_id"].notna()].copy()
 
     episodes["seasonNumber"] = pd.to_numeric(episodes.get("seasonNumber"), errors="coerce").astype("Int64")
     episodes["episodeNumber"] = pd.to_numeric(episodes.get("episodeNumber"), errors="coerce").astype("Int64")
@@ -166,6 +179,12 @@ def _normalize_platform(row: pd.Series) -> str:
     if pd.notna(row.get("tvmaze_network")):
         return "network"
     return "unknown"
+
+
+def _is_running(imdb_has_end: pd.Series, tvmaze_status: pd.Series | None) -> pd.Series:
+    if tvmaze_status is None:
+        tvmaze_status = pd.Series([None] * len(imdb_has_end), index=imdb_has_end.index)
+    return (~imdb_has_end) & (tvmaze_status != "Ended")
 
 
 def _ensure_labels_template(config: Config) -> None:

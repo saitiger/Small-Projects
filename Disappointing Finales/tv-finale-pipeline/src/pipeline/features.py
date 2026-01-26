@@ -22,7 +22,7 @@ def build_features(config: Config, shows_df: pd.DataFrame | None = None, episode
     episodes_df = episodes_df if episodes_df is not None else read_parquet(config.episodes_parquet)
 
     features = _compute_features(config, episodes_df)
-    features = features.merge(shows_df[["show_id"]], on="show_id", how="right")
+    features = features.merge(shows_df[["show_id", "imdb_tconst", "title"]], on="show_id", how="right")
 
     write_parquet(features, config.features_parquet)
     return features
@@ -36,6 +36,8 @@ def _compute_features(config: Config, episodes: pd.DataFrame) -> pd.DataFrame:
     df["air_date"] = pd.to_datetime(df["air_date"], errors="coerce")
     df["runtime_minutes"] = pd.to_numeric(df["runtime_minutes"], errors="coerce")
     df["imdb_rating"] = pd.to_numeric(df["imdb_rating"], errors="coerce")
+    if "has_tvmaze_match" not in df.columns:
+        df["has_tvmaze_match"] = False
 
     group = df.groupby("show_id", dropna=False)
 
@@ -43,6 +45,7 @@ def _compute_features(config: Config, episodes: pd.DataFrame) -> pd.DataFrame:
     missing_runtime_pct = group["runtime_minutes"].apply(lambda s: s.isna().mean()).rename("missing_runtime_pct")
     missing_airdate_pct = group["air_date"].apply(lambda s: s.isna().mean()).rename("missing_airdate_pct")
     missing_ratings_pct = group["imdb_rating"].apply(lambda s: s.isna().mean()).rename("missing_ratings_pct")
+    tvmaze_match_rate = group["has_tvmaze_match"].mean().rename("tvmaze_match_rate")
 
     median_runtime = group["runtime_minutes"].median()
     global_median_runtime = df["runtime_minutes"].median()
@@ -100,6 +103,14 @@ def _compute_features(config: Config, episodes: pd.DataFrame) -> pd.DataFrame:
     era_bucket = finale_date.apply(lambda date: _bucket_era(date, config)).rename("era_bucket")
     runway_bucket = total_runtime_minutes.apply(lambda minutes: _bucket_runway(minutes, config)).rename("runway_bucket")
 
+    airdate_coverage_pct = (1 - missing_airdate_pct).rename("airdate_coverage_pct")
+    runtime_coverage_pct = (1 - missing_runtime_pct).rename("runtime_coverage_pct")
+    ratings_coverage_pct = (1 - missing_ratings_pct).rename("ratings_coverage_pct")
+    data_quality_score = (
+        (airdate_coverage_pct + runtime_coverage_pct + ratings_coverage_pct) / 3
+    ).rename("data_quality_score")
+    finale_is_true_series_finale = pd.Series(True, index=total_episodes.index, name="finale_is_true_series_finale")
+
     features = pd.concat(
         [
             total_episodes,
@@ -116,10 +127,16 @@ def _compute_features(config: Config, episodes: pd.DataFrame) -> pd.DataFrame:
             gap_days,
             era_bucket,
             runway_bucket,
+            tvmaze_match_rate,
             missing_runtime_pct,
             missing_airdate_pct,
             missing_ratings_pct,
+            airdate_coverage_pct,
+            runtime_coverage_pct,
+            ratings_coverage_pct,
+            data_quality_score,
             finale_info["finale_id_method"],
+            finale_is_true_series_finale,
         ],
         axis=1,
     ).reset_index()
@@ -137,7 +154,7 @@ def _identify_finale(df: pd.DataFrame) -> pd.DataFrame:
             method = "air_date"
         else:
             finale = group.sort_values(["season_number", "episode_number"]).iloc[-1]
-            method = "season_episode"
+            method = "season_episode_fallback"
 
         return pd.Series(
             {

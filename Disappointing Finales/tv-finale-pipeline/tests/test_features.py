@@ -34,4 +34,4 @@ def test_features_basic_metrics():
     assert row["total_runtime_minutes"] == 120
     assert round(row["series_avg_episode_rating"], 2) == 7.5
     assert row["final_season_number"] == 1
-    assert row["finale_id_method"] in {"air_date", "season_episode"}
+    assert row["finale_id_method"] in {"air_date", "season_episode_fallback"}
